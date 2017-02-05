@@ -103,7 +103,12 @@ EntityActionType EntityActionInterface::actionTypeFromString(QString actionTypeS
     if (normalizedActionTypeString == "traveloriented") {
         return ACTION_TYPE_TRAVEL_ORIENTED;
     }
-
+    if (normalizedActionTypeString == "hinge") {
+        return ACTION_TYPE_HINGE;
+    }
+    if (normalizedActionTypeString == "vehicle") {
+        return ACTION_TYPE_VEHICLE;
+    }
     qCDebug(entities) << "Warning -- EntityActionInterface::actionTypeFromString got unknown action-type name" << actionTypeString;
     return ACTION_TYPE_NONE;
 }
@@ -120,6 +125,10 @@ QString EntityActionInterface::actionTypeToString(EntityActionType actionType) {
             return "hold";
         case ACTION_TYPE_TRAVEL_ORIENTED:
             return "travel-oriented";
+        case ACTION_TYPE_HINGE:
+            return "hinge";
+        case ACTION_TYPE_VEHICLE:
+            return "vehicle";
     }
     assert(false);
     return "none";
