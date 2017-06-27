@@ -73,14 +73,8 @@ DeferredFragment unpackDeferredFragmentNoPosition(vec2 texcoord) {
         frag.scattering = specularVal.x;
     }
 
-    if (frag.metallic <= 0.5) {
-        frag.metallic = 0.0;
-        frag.fresnel = vec3(0.03); // Default Di-electric fresnel value
-    } else {
-        frag.fresnel = vec3(diffuseVal.xyz);
-        frag.metallic = 1.0;
-    }
-
+   
+	frag.fresnel =  vec3(diffuseVal.xyz * frag.metallic);
     return frag;
 }
 
@@ -105,16 +99,8 @@ DeferredFragment unpackDeferredFragmentNoPositionNoAmbient(vec2 texcoord) {
 
     //frag.emissive = specularVal.xyz;
     frag.obscurance = 1.0;
-
-
-    if (frag.metallic <= 0.5) {
-        frag.metallic = 0.0;
-        frag.fresnel = vec3(0.03); // Default Di-electric fresnel value
-    } else {
-        frag.fresnel = vec3(diffuseVal.xyz);
-        frag.metallic = 1.0;
-    }
-
+	   
+	frag.fresnel =  vec3(diffuseVal.xyz * frag.metallic);
     return frag;
 }
 
