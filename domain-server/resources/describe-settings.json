@@ -908,7 +908,7 @@
         {
           "name": "max_avatar_velocity",
           "type": "double",
-          "label": "Maximum Avatar Velocity",
+          "label": "Speed Limit (meters/second)",
           "help": "Limits the velocity  of avatars in your domain. Setting to 0 will uncap velocity.",
           "placeholder": 0.0,
           "default": 0.0
