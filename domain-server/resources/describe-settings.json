@@ -909,9 +909,9 @@
           "name": "max_avatar_velocity",
           "type": "double",
           "label": "Maximum Avatar Velocity",
-          "help": "Limits the velocity  of avatars in your domain. Setting to -1 will uncap velocity.",
-          "placeholder": -1.0,
-          "default": -1.0
+          "help": "Limits the velocity  of avatars in your domain. Setting to 0 will uncap velocity.",
+          "placeholder": 0.0,
+          "default": 0.0
         },
         {
           "name": "avatar_whitelist",
