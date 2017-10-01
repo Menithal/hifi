@@ -62,7 +62,8 @@ class MeshProxyList;
 /// EntityItem class this is the base class for all entity types. It handles the basic properties and functionality available
 /// to all other entity types. In particular: postion, size, rotation, age, lifetime, velocity, gravity. You can not instantiate
 /// one directly, instead you must only construct one of it's derived classes with additional features.
-class EntityItem : public SpatiallyNestable, public ReadWriteLockable {
+class EntityItem : public QObject, public SpatiallyNestable, public ReadWriteLockable {
+    Q_OBJECT
     // These two classes manage lists of EntityItem pointers and must be able to cleanup pointers when an EntityItem is deleted.
     // To make the cleanup robust each EntityItem has backpointers to its manager classes (which are only ever set/cleared by
     // the managers themselves, hence they are fiends) whose NULL status can be used to determine which managers still need to
@@ -179,7 +180,7 @@ public:
     void setDescription(const QString& value);
 
     /// Dimensions in meters (0.0 - TREE_SCALE)
-    inline const glm::vec3 getDimensions() const { return getScale(); }
+    inline const glm::vec3 getDimensions() const { return _dimensions; }
     virtual void setDimensions(const glm::vec3& value);
 
     float getLocalRenderAlpha() const;
@@ -305,9 +306,6 @@ public:
 
     QString getMarketplaceID() const;
     void setMarketplaceID(const QString& value);
-
-    bool getShouldHighlight() const;
-    void setShouldHighlight(const bool value);
 
     // TODO: get rid of users of getRadius()...
     float getRadius() const;
@@ -470,6 +468,7 @@ protected:
 
     virtual void dimensionsChanged() override;
 
+    glm::vec3 _dimensions { ENTITY_ITEM_DEFAULT_DIMENSIONS };
     EntityTypes::EntityType _type { EntityTypes::Unknown };
     quint64 _lastSimulated { 0 }; // last time this entity called simulate(), this includes velocity, angular velocity,
                             // and physics changes

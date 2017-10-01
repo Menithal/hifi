@@ -32,7 +32,8 @@
 #include "EntitySimulation.h"
 #include "EntityDynamicFactoryInterface.h"
 
-
+Q_DECLARE_METATYPE(EntityItemPointer);
+int entityItemPointernMetaTypeId = qRegisterMetaType<EntityItemPointer>();
 int EntityItem::_maxActionsDataSize = 800;
 quint64 EntityItem::_rememberDeletedActionTime = 20 * USECS_PER_SECOND;
 
@@ -42,7 +43,8 @@ EntityItem::EntityItem(const EntityItemID& entityItemID) :
     setLocalVelocity(ENTITY_ITEM_DEFAULT_VELOCITY);
     setLocalAngularVelocity(ENTITY_ITEM_DEFAULT_ANGULAR_VELOCITY);
     // explicitly set transform parts to set dirty flags used by batch rendering
-    setScale(ENTITY_ITEM_DEFAULT_DIMENSIONS);
+    locationChanged();
+    dimensionsChanged();
     quint64 now = usecTimestampNow();
     _lastSimulated = now;
     _lastUpdated = now;
@@ -1376,7 +1378,11 @@ void EntityItem::setDimensions(const glm::vec3& value) {
     if (value.x <= 0.0f || value.y <= 0.0f || value.z <= 0.0f) {
         return;
     }
-    setScale(value);
+    if (_dimensions != value) {
+        _dimensions = value;
+        locationChanged();
+        dimensionsChanged();
+    }
 }
 
 /// The maximum bounding cube for the entity, independent of it's rotation.
@@ -1565,13 +1571,17 @@ void EntityItem::updatePosition(const glm::vec3& value) {
 }
 
 void EntityItem::updateParentID(const QUuid& value) {
-    if (getParentID() != value) {
+    QUuid oldParentID = getParentID();
+    if (oldParentID != value) {
+        EntityTreePointer tree = getTree();
+        if (!oldParentID.isNull()) {
+            tree->removeFromChildrenOfAvatars(getThisPointer());
+        }
         setParentID(value);
         // children are forced to be kinematic
         // may need to not collide with own avatar
         markDirtyFlags(Simulation::DIRTY_MOTION_TYPE | Simulation::DIRTY_COLLISION_GROUP);
 
-        EntityTreePointer tree = getTree();
         if (tree) {
             tree->addToNeedsParentFixupList(getThisPointer());
         }
@@ -2015,7 +2025,7 @@ bool EntityItem::removeActionInternal(const QUuid& actionID, EntitySimulationPoi
     _previouslyDeletedActions.insert(actionID, usecTimestampNow());
     if (_objectActions.contains(actionID)) {
         if (!simulation) {
-        EntityTreeElementPointer element = _element; // use local copy of _element for logic below
+            EntityTreeElementPointer element = _element; // use local copy of _element for logic below
             EntityTreePointer entityTree = element ? element->getTree() : nullptr;
             simulation = entityTree ? entityTree->getSimulation() : nullptr;
         }
