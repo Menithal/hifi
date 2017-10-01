@@ -1,5 +1,5 @@
 {
-  "version": 1.8,
+  "version": 1.9,
   "settings": [
     {
       "name": "metaverse",
@@ -904,6 +904,14 @@
           "help": "Limits the scale of avatars in your domain. Cannot be greater than 1000.",
           "placeholder": 3.0,
           "default": 3.0
+        },
+        {
+          "name": "max_avatar_velocity",
+          "type": "double",
+          "label": "Maximum Avatar Velocity",
+          "help": "Limits the velocity  of avatars in your domain. Setting to -1 will uncap velocity.",
+          "placeholder": -1.0,
+          "default": -1.0
         },
         {
           "name": "avatar_whitelist",

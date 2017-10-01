@@ -78,7 +78,7 @@ CharacterController::CharacterController() {
     _followLinearDisplacement = btVector3(0, 0, 0);
     _followAngularDisplacement = btQuaternion::getIdentity();
     _hasSupport = false;
-
+    _maxVelocity = 0.0f;
     _pendingFlags = PENDING_FLAG_UPDATE_SHAPE;
 }
 
@@ -632,6 +632,10 @@ void CharacterController::computeNewVelocity(btScalar dt, btVector3& velocity) {
         velocity = btVector3(0.0f, 0.0f, 0.0f);
     }
 
+    if (velocity.length() > _maxVelocity && _maxVelocity >= 1.0f) {
+        velocity = velocity.safeNormalize() * _maxVelocity;
+    }
+
     // 'thrust' is applied at the very end
     _targetVelocity += dt * _linearAcceleration;
     velocity += dt * _linearAcceleration;
@@ -811,5 +815,14 @@ void CharacterController::setCollisionlessAllowed(bool value) {
     if (value != _collisionlessAllowed) {
         _collisionlessAllowed = value;
         _pendingFlags |= PENDING_FLAG_UPDATE_COLLISION_GROUP;
+    }
+}
+
+void CharacterController::setMaxVelocity(float value) {
+    if (value > 0.0f) {
+        _maxVelocity = value;
+    }
+    else {
+        _maxVelocity = 0.0f;
     }
 }

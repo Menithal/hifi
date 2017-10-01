@@ -2302,6 +2302,10 @@ void MyAvatar::restrictScaleFromDomainSettings(const QJsonObject& domainSettings
     float settingMaxScale = avatarsObject[MAX_SCALE_OPTION].toDouble(MAX_AVATAR_SCALE);
     setDomainMaximumScale(settingMaxScale);
 
+    static const QString MAX_AVATAR_VELOCITY_OPTION = "max_avatar_velocity";
+    float settingMaxAvatarVelocity = avatarsObject[MAX_AVATAR_VELOCITY_OPTION].toDouble(DEFAULT_MAX_AVATAR_VELOCITY);
+    _characterController.setMaxVelocity(settingMaxAvatarVelocity);
+
     // make sure that the domain owner didn't flip min and max
     if (_domainMinimumScale > _domainMaximumScale) {
         std::swap(_domainMinimumScale, _domainMaximumScale);

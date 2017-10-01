@@ -121,6 +121,7 @@ public:
     void setFlyingAllowed(bool value);
     void setCollisionlessAllowed(bool value);
 
+    void setMaxVelocity(float value);
 
 protected:
 #ifdef DEBUG_STATE_CHANGE
@@ -183,6 +184,7 @@ protected:
     bool _stepUpEnabled { true };
     bool _hasSupport;
 
+    btScalar _maxVelocity { 0.0f };
     btScalar _gravity { 0.0f };
 
     btScalar _jumpSpeed;

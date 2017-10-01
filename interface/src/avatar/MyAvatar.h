@@ -707,6 +707,7 @@ private:
 
     const float ROLL_CONTROL_DEAD_ZONE_DEFAULT = 8.0f; // deg
     const float ROLL_CONTROL_RATE_DEFAULT = 2.5f; // deg/sec/deg
+    const float DEFAULT_MAX_AVATAR_VELOCITY = 0.0f; // By default it is disabled.
     bool _hmdRollControlEnabled { true };
     float _hmdRollControlDeadZone { ROLL_CONTROL_DEAD_ZONE_DEFAULT };
     float _hmdRollControlRate { ROLL_CONTROL_RATE_DEFAULT };
