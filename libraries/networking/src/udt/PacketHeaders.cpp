@@ -30,7 +30,7 @@ PacketVersion versionForPacketType(PacketType packetType) {
         case PacketType::EntityEdit:
         case PacketType::EntityData:
         case PacketType::EntityPhysics:
-            return VERSION_ENTITIES_ANIMATION_ALLOW_TRANSLATION_PROPERTIES;
+            return VERSION_ENTITIES_ZONE_MAXIMUM_AVATAR_VELOCITY;
         case PacketType::EntityQuery:
             return static_cast<PacketVersion>(EntityQueryPacketVersion::JSONFilterWithFamilyTree);
         case PacketType::AvatarIdentity:
