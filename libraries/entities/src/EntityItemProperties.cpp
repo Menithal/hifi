@@ -505,7 +505,7 @@ QScriptValue EntityItemProperties::copyToScriptValue(QScriptEngine* engine, bool
 
         COPY_PROPERTY_TO_QSCRIPTVALUE(PROP_FLYING_ALLOWED, flyingAllowed);
         COPY_PROPERTY_TO_QSCRIPTVALUE(PROP_GHOSTING_ALLOWED, ghostingAllowed);
-        COPY_PROPERTY_TO_QSCRIPTVALUE(PROP_FILTER_URL, filterURL)
+        COPY_PROPERTY_TO_QSCRIPTVALUE(PROP_FILTER_URL, filterURL);
         COPY_PROPERTY_TO_QSCRIPTVALUE(PROP_MAXIMUM_AVATAR_VELOCITY, maximumAvatarVelocity);
     }
 
