@@ -187,7 +187,8 @@ enum EntityPropertyList {
     PROP_SERVER_SCRIPTS,
 
     PROP_FILTER_URL,
-    
+    PROP_MAXIMUM_AVATAR_VELOCITY,
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // ATTENTION: add new properties to end of list just ABOVE this line
     PROP_AFTER_LAST_ITEM,
