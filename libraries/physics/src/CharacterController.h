@@ -126,8 +126,8 @@ public:
     void setFlyingAllowed(bool value);
     void setCollisionlessAllowed(bool value);
 
-    void setMaxVelocity(float value);
-    float getMaxVelocity();
+    void setMaximumVelocity(float value);
+    float getMaximumVelocity();
 
 protected:
 #ifdef DEBUG_STATE_CHANGE
@@ -190,7 +190,7 @@ protected:
     bool _stepUpEnabled { true };
     bool _hasSupport;
 
-    btScalar _maxVelocity { 0.0f };
+    btScalar _maximumVelocity{ 0.0f };
     btScalar _currentGravity { 0.0f };
     btScalar _gravity { DEFAULT_AVATAR_GRAVITY };
 

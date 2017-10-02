@@ -98,11 +98,11 @@ public:
     virtual void debugDump() const override;
 
     static const ShapeType DEFAULT_SHAPE_TYPE;
-    static const float DEFAULT_MAXIMUM_AVATAR_VELOCITY;
     static const QString DEFAULT_COMPOUND_SHAPE_URL;
     static const bool DEFAULT_FLYING_ALLOWED;
     static const bool DEFAULT_GHOSTING_ALLOWED;
     static const QString DEFAULT_FILTER_URL;
+    static const float DEFAULT_MAXIMUM_AVATAR_VELOCITY;
 
 protected:
     KeyLightPropertyGroup _keyLightProperties;

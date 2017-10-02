@@ -76,7 +76,7 @@ CharacterController::CharacterController() {
     _followLinearDisplacement = btVector3(0, 0, 0);
     _followAngularDisplacement = btQuaternion::getIdentity();
     _hasSupport = false;
-    _maxVelocity = 0.0f;
+    _maximumVelocity = 0.0f;
     _pendingFlags = PENDING_FLAG_UPDATE_SHAPE;
 }
 
@@ -639,8 +639,8 @@ void CharacterController::computeNewVelocity(btScalar dt, btVector3& velocity) {
         velocity = btVector3(0.0f, 0.0f, 0.0f);
     }
 
-    if (velocity.length() > _maxVelocity && _maxVelocity >= 1.0f) {
-        velocity = velocity.safeNormalize() * _maxVelocity;
+    if (velocity.length() > _maximumVelocity && _maximumVelocity >= 1.0f) {
+        velocity = velocity.safeNormalize() * _maximumVelocity;
     }
 
     // 'thrust' is applied at the very end
@@ -829,16 +829,16 @@ void CharacterController::setCollisionlessAllowed(bool value) {
     }
 }
 
-void CharacterController::setMaxVelocity(float value) {
+void CharacterController::setMaximumVelocity(float value) {
     if (value > 0.0f) {
-        _maxVelocity = value;
+        _maximumVelocity = value;
     }
     else {
-        _maxVelocity = 0.0f;
+        _maximumVelocity = 0.0f;
     }
 }
 
-float CharacterController::getMaxVelocity() {
-    return _maxVelocity;
+float CharacterController::getMaximumVelocity() {
+    return _maximumVelocity;
 }
 

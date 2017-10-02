@@ -273,6 +273,7 @@ namespace AvatarDataPacket {
 
 static const float MAX_AVATAR_SCALE = 1000.0f;
 static const float MIN_AVATAR_SCALE = .005f;
+static const float DEFAULT_MAXIMUM_AVATAR_VELOCITY = 0.0f;
 
 const float MAX_AUDIO_LOUDNESS = 1000.0f; // close enough for mouth animation
 
@@ -504,6 +505,9 @@ public:
         { _domainMinimumScale = glm::clamp(domainMinimumScale, MIN_AVATAR_SCALE, MAX_AVATAR_SCALE); _scaleChanged = usecTimestampNow(); }
     void setDomainMaximumScale(float domainMaximumScale)
         { _domainMaximumScale = glm::clamp(domainMaximumScale, MIN_AVATAR_SCALE, MAX_AVATAR_SCALE); _scaleChanged = usecTimestampNow(); }
+    void setDomainMaximumAvatarVelocity(float domainMaximumAvatarVelocity) {
+
+    }
 
     //  Hand State
     Q_INVOKABLE void setHandState(char s) { _handState = s; }
@@ -716,6 +720,8 @@ protected:
     float _targetScale;
     float _domainMinimumScale { MIN_AVATAR_SCALE };
     float _domainMaximumScale { MAX_AVATAR_SCALE };
+
+    float _domainMaximumAvatarVelocity { DEFAULT_MAXIMUM_AVATAR_VELOCITY };
 
     //  Hand state (are we grabbing something or not)
     char _handState;
