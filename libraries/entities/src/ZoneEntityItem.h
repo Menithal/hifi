@@ -102,6 +102,7 @@ public:
     static const bool DEFAULT_FLYING_ALLOWED;
     static const bool DEFAULT_GHOSTING_ALLOWED;
     static const QString DEFAULT_FILTER_URL;
+
     static const float DEFAULT_MAXIMUM_AVATAR_VELOCITY;
 
 protected:

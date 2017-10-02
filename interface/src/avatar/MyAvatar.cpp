@@ -583,9 +583,14 @@ void MyAvatar::simulate(float deltaTime) {
                 zoneAllowsFlying = zone->getFlyingAllowed();
                 collisionlessAllowed = zone->getGhostingAllowed();
                 maximumAvatarVelocity = zone->getMaximumAvatarVelocity();
+
+                if (maximumAvatarVelocity > _domainMaximumAvatarVelocity && _domainMaximumAvatarVelocity > 0) {
+                    maximumAvatarVelocity = _domainMaximumAvatarVelocity;
+                }
             } else {
-                _characterController.setMaximumVelocity( _domainMaximumAvatarVelocity );
+                maximumAvatarVelocity = _domainMaximumAvatarVelocity;
             }
+
             auto now = usecTimestampNow();
             EntityEditPacketSender* packetSender = qApp->getEntityEditPacketSender();
             MovingEntitiesOperator moveOperator;

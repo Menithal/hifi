@@ -909,7 +909,7 @@
           "name": "max_avatar_velocity",
           "type": "double",
           "label": "Speed Limit (meters/second)",
-          "help": "Limits the  velocity  of avatars in your domain Globally. Zones can be used to control within smaller. Setting to 0 will uncap velocity.",
+          "help": "Limits the  velocity  of avatars in your domain Globally. This is the maximum limit regardless of zone. Setting to 0 will uncap velocity globally, but zones can still have a speed limit.",
           "placeholder": 0.0,
           "default": 0.0
         },

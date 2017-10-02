@@ -29,6 +29,7 @@ const ShapeType ZoneEntityItem::DEFAULT_SHAPE_TYPE = SHAPE_TYPE_BOX;
 const QString ZoneEntityItem::DEFAULT_COMPOUND_SHAPE_URL = "";
 const bool ZoneEntityItem::DEFAULT_FLYING_ALLOWED = true;
 const bool ZoneEntityItem::DEFAULT_GHOSTING_ALLOWED = true;
+
 const float ZoneEntityItem::DEFAULT_MAXIMUM_AVATAR_VELOCITY = 0.0f;
 const QString ZoneEntityItem::DEFAULT_FILTER_URL = "";
 
