@@ -583,8 +583,8 @@ void MyAvatar::simulate(float deltaTime) {
                 zoneAllowsFlying = zone->getFlyingAllowed();
                 collisionlessAllowed = zone->getGhostingAllowed();
                 maximumAvatarVelocity = zone->getMaximumAvatarVelocity();
-
-                if (maximumAvatarVelocity > _domainMaximumAvatarVelocity && _domainMaximumAvatarVelocity > 0) {
+                if (( maximumAvatarVelocity == 0 || maximumAvatarVelocity > _domainMaximumAvatarVelocity)
+                    && _domainMaximumAvatarVelocity >= 1.0f) {
                     maximumAvatarVelocity = _domainMaximumAvatarVelocity;
                 }
             } else {
