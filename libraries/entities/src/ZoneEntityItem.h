@@ -118,7 +118,7 @@ protected:
     bool _flyingAllowed { DEFAULT_FLYING_ALLOWED };
     bool _ghostingAllowed { DEFAULT_GHOSTING_ALLOWED };
     QString _filterURL { DEFAULT_FILTER_URL };
-    float _maximumAvatarVelocity = 0.0;
+    float _maximumAvatarVelocity{ DEFAULT_MAXIMUM_AVATAR_VELOCITY };
 
     // Dirty flags turn true when either keylight properties is changing values.
     bool _keyLightPropertiesChanged { false };
