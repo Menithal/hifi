@@ -576,11 +576,13 @@ void MyAvatar::simulate(float deltaTime) {
     if (entityTree) {
         bool zoneAllowsFlying = true;
         bool collisionlessAllowed = true;
+        float maximumAvatarVelocity = _characterController.getMaxVelocity();
         entityTree->withWriteLock([&] {
             std::shared_ptr<ZoneEntityItem> zone = entityTreeRenderer->myAvatarZone();
             if (zone) {
                 zoneAllowsFlying = zone->getFlyingAllowed();
                 collisionlessAllowed = zone->getGhostingAllowed();
+                maximumAvatarVelocity = zone->getMaximumAvatarVelocity();
             }
             auto now = usecTimestampNow();
             EntityEditPacketSender* packetSender = qApp->getEntityEditPacketSender();
@@ -612,6 +614,7 @@ void MyAvatar::simulate(float deltaTime) {
         });
         _characterController.setFlyingAllowed(zoneAllowsFlying && _enableFlying);
         _characterController.setCollisionlessAllowed(collisionlessAllowed);
+        _characterController.setMaxVelocity(maximumAvatarVelocity);
     }
 
     updateAvatarEntities();
@@ -2248,7 +2251,7 @@ void MyAvatar::restrictScaleFromDomainSettings(const QJsonObject& domainSettings
     setDomainMaximumScale(settingMaxScale);
 
     static const QString MAX_AVATAR_VELOCITY_OPTION = "max_avatar_velocity";
-    float settingMaxAvatarVelocity = avatarsObject[MAX_AVATAR_VELOCITY_OPTION].toDouble(DEFAULT_MAX_AVATAR_VELOCITY);
+    float settingMaxAvatarVelocity = avatarsObject[MAX_AVATAR_VELOCITY_OPTION].toDouble(DEFAULT_MAXIMUM_AVATAR_VELOCITY);
     _characterController.setMaxVelocity(settingMaxAvatarVelocity);
 
     // make sure that the domain owner didn't flip min and max

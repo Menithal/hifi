@@ -837,3 +837,8 @@ void CharacterController::setMaxVelocity(float value) {
         _maxVelocity = 0.0f;
     }
 }
+
+float CharacterController::getMaxVelocity() {
+    return _maxVelocity;
+}
+

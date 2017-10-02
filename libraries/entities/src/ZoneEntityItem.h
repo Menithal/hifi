@@ -75,6 +75,10 @@ public:
     void setFlyingAllowed(bool value) { _flyingAllowed = value; }
     bool getGhostingAllowed() const { return _ghostingAllowed; }
     void setGhostingAllowed(bool value) { _ghostingAllowed = value; }
+
+    float getMaximumAvatarVelocity() const { return _maximumAvatarVelocity; }
+    void setMaximumAvatarVelocity(float value) { _maximumAvatarVelocity = value; }
+
     QString getFilterURL() const;
     void setFilterURL(const QString url); 
 
@@ -94,6 +98,7 @@ public:
     virtual void debugDump() const override;
 
     static const ShapeType DEFAULT_SHAPE_TYPE;
+    static const float DEFAULT_MAXIMUM_AVATAR_VELOCITY;
     static const QString DEFAULT_COMPOUND_SHAPE_URL;
     static const bool DEFAULT_FLYING_ALLOWED;
     static const bool DEFAULT_GHOSTING_ALLOWED;
@@ -113,12 +118,14 @@ protected:
     bool _flyingAllowed { DEFAULT_FLYING_ALLOWED };
     bool _ghostingAllowed { DEFAULT_GHOSTING_ALLOWED };
     QString _filterURL { DEFAULT_FILTER_URL };
+    float _maximumAvatarVelocity = 0.0;
 
     // Dirty flags turn true when either keylight properties is changing values.
     bool _keyLightPropertiesChanged { false };
     bool _backgroundPropertiesChanged { false };
     bool _skyboxPropertiesChanged { false };
     bool _stagePropertiesChanged { false };
+    bool _maximumAvatarVelocityChanged { false };
 
     static bool _drawZoneBoundaries;
     static bool _zonesArePickable;

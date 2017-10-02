@@ -127,6 +127,7 @@ public:
     void setCollisionlessAllowed(bool value);
 
     void setMaxVelocity(float value);
+    float getMaxVelocity();
 
 protected:
 #ifdef DEBUG_STATE_CHANGE

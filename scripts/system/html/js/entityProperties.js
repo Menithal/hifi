@@ -675,6 +675,7 @@ function loaded() {
         var elZoneFlyingAllowed = document.getElementById("property-zone-flying-allowed");
         var elZoneGhostingAllowed = document.getElementById("property-zone-ghosting-allowed");
         var elZoneFilterURL = document.getElementById("property-zone-filter-url");
+        var elZoneMaximumVelocity = document.getElementById("property-zone-max-velocity");
 
         var elPolyVoxSections = document.querySelectorAll(".poly-vox-section");
         allSections.push(elPolyVoxSections);
@@ -1016,6 +1017,7 @@ function loaded() {
                             elZoneFlyingAllowed.checked = properties.flyingAllowed;
                             elZoneGhostingAllowed.checked = properties.ghostingAllowed;
                             elZoneFilterURL.value = properties.filterURL;
+                            elZoneMaximumVelocity.value = properties.maximumAvatarVelocity;
 
                             showElements(document.getElementsByClassName('skybox-section'), elZoneBackgroundMode.value == 'skybox');
                         } else if (properties.type == "PolyVox") {
@@ -1425,6 +1427,7 @@ function loaded() {
         elZoneFlyingAllowed.addEventListener('change', createEmitCheckedPropertyUpdateFunction('flyingAllowed'));
         elZoneGhostingAllowed.addEventListener('change', createEmitCheckedPropertyUpdateFunction('ghostingAllowed'));
         elZoneFilterURL.addEventListener('change', createEmitTextPropertyUpdateFunction('filterURL'));
+        elZoneMaximumVelocity.addEventListener('change', createEmitNumberPropertyUpdateFunction('maximumAvatarVelocity'));
 
         var voxelVolumeSizeChangeFunction = createEmitVec3PropertyUpdateFunction(
             'voxelVolumeSize', elVoxelVolumeSizeX, elVoxelVolumeSizeY, elVoxelVolumeSizeZ);

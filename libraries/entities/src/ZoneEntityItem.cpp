@@ -29,6 +29,7 @@ const ShapeType ZoneEntityItem::DEFAULT_SHAPE_TYPE = SHAPE_TYPE_BOX;
 const QString ZoneEntityItem::DEFAULT_COMPOUND_SHAPE_URL = "";
 const bool ZoneEntityItem::DEFAULT_FLYING_ALLOWED = true;
 const bool ZoneEntityItem::DEFAULT_GHOSTING_ALLOWED = true;
+const float ZoneEntityItem::DEFAULT_MAXIMUM_AVATAR_VELOCITY = 0.0f;
 const QString ZoneEntityItem::DEFAULT_FILTER_URL = "";
 
 EntityItemPointer ZoneEntityItem::factory(const EntityItemID& entityID, const EntityItemProperties& properties) {
@@ -44,6 +45,8 @@ ZoneEntityItem::ZoneEntityItem(const EntityItemID& entityItemID) : EntityItem(en
     _compoundShapeURL = DEFAULT_COMPOUND_SHAPE_URL;
 
     _backgroundMode = BACKGROUND_MODE_INHERIT;
+
+    _maximumAvatarVelocity = 0.0f;
 }
 
 EntityItemProperties ZoneEntityItem::getProperties(EntityPropertyFlags desiredProperties) const {
@@ -68,6 +71,8 @@ EntityItemProperties ZoneEntityItem::getProperties(EntityPropertyFlags desiredPr
     COPY_ENTITY_PROPERTY_TO_PROPERTIES(flyingAllowed, getFlyingAllowed);
     COPY_ENTITY_PROPERTY_TO_PROPERTIES(ghostingAllowed, getGhostingAllowed);
     COPY_ENTITY_PROPERTY_TO_PROPERTIES(filterURL, getFilterURL);
+
+    COPY_ENTITY_PROPERTY_TO_PROPERTIES(maximumAvatarVelocity, getMaximumAvatarVelocity);
 
     return properties;
 }
@@ -107,7 +112,7 @@ bool ZoneEntityItem::setSubClassProperties(const EntityItemProperties& propertie
     SET_ENTITY_PROPERTY_FROM_PROPERTIES(flyingAllowed, setFlyingAllowed);
     SET_ENTITY_PROPERTY_FROM_PROPERTIES(ghostingAllowed, setGhostingAllowed);
     SET_ENTITY_PROPERTY_FROM_PROPERTIES(filterURL, setFilterURL);
-
+    SET_ENTITY_PROPERTY_FROM_PROPERTIES(maximumAvatarVelocity, setMaximumAvatarVelocity);
     // Contains a QString property, must be synchronized
     withWriteLock([&] {
         _skyboxPropertiesChanged = _skyboxProperties.setProperties(properties);
@@ -157,6 +162,7 @@ int ZoneEntityItem::readEntitySubclassDataFromBuffer(const unsigned char* data, 
     READ_ENTITY_PROPERTY(PROP_FLYING_ALLOWED, bool, setFlyingAllowed);
     READ_ENTITY_PROPERTY(PROP_GHOSTING_ALLOWED, bool, setGhostingAllowed);
     READ_ENTITY_PROPERTY(PROP_FILTER_URL, QString, setFilterURL);
+    READ_ENTITY_PROPERTY(PROP_MAXIMUM_AVATAR_VELOCITY, float, setMaximumAvatarVelocity);
 
     return bytesRead;
 }
@@ -182,6 +188,8 @@ EntityPropertyFlags ZoneEntityItem::getEntityProperties(EncodeBitstreamParams& p
     requestedProperties += PROP_FLYING_ALLOWED;
     requestedProperties += PROP_GHOSTING_ALLOWED;
     requestedProperties += PROP_FILTER_URL;
+
+    requestedProperties += PROP_MAXIMUM_AVATAR_VELOCITY;
 
     return requestedProperties;
 }
@@ -213,6 +221,7 @@ void ZoneEntityItem::appendSubclassData(OctreePacketData* packetData, EncodeBits
     APPEND_ENTITY_PROPERTY(PROP_FLYING_ALLOWED, getFlyingAllowed());
     APPEND_ENTITY_PROPERTY(PROP_GHOSTING_ALLOWED, getGhostingAllowed());
     APPEND_ENTITY_PROPERTY(PROP_FILTER_URL, getFilterURL());
+    APPEND_ENTITY_PROPERTY(PROP_MAXIMUM_AVATAR_VELOCITY, getMaximumAvatarVelocity());
 }
 
 void ZoneEntityItem::debugDump() const {
@@ -291,5 +300,6 @@ void ZoneEntityItem::resetRenderingPropertiesChanged() {
         _backgroundPropertiesChanged = false;
         _stagePropertiesChanged = false;
         _skyboxPropertiesChanged = false;
+        _maximumAvatarVelocityChanged = false;
     });
 }
