@@ -583,9 +583,7 @@ void MyAvatar::simulate(float deltaTime) {
                 zoneAllowsFlying = zone->getFlyingAllowed();
                 collisionlessAllowed = zone->getGhostingAllowed();
                 maximumAvatarVelocity = zone->getMaximumAvatarVelocity();
-            }
-            else {
-
+            } else {
                 _characterController.setMaximumVelocity( _domainMaximumAvatarVelocity );
             }
             auto now = usecTimestampNow();

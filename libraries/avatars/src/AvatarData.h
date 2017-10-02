@@ -506,7 +506,7 @@ public:
     void setDomainMaximumScale(float domainMaximumScale)
         { _domainMaximumScale = glm::clamp(domainMaximumScale, MIN_AVATAR_SCALE, MAX_AVATAR_SCALE); _scaleChanged = usecTimestampNow(); }
     void setDomainMaximumAvatarVelocity(float domainMaximumAvatarVelocity) {
-
+        _domainMaximumAvatarVelocity = domainMaximumAvatarVelocity;
     }
 
     //  Hand State
