@@ -33,6 +33,8 @@ QStringList InputConfiguration::inputPlugins() {
         QString pluginName = plugin->getName();
         if (pluginName == QString("OpenVR")) {
             inputPlugins << QString("Vive");
+        } if (pluginName == QString("SDL2")) {
+            inputPlugins << QString("Gamepad");
         } else {
             inputPlugins << pluginName;
         }
@@ -55,6 +57,8 @@ QStringList InputConfiguration::activeInputPlugins() {
             QString pluginName = plugin->getName();
             if (pluginName == QString("OpenVR")) {
                 activePlugins << QString("Vive");
+            } if (pluginName == QString("SDL2")) {
+                activePlugins << QString("Gamepad");
             } else {
                 activePlugins << pluginName;
             }

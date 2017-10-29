@@ -63,6 +63,7 @@ bool SixenseManager::_sixenseLoaded = false;
 
 const char* SixenseManager::NAME { "Sixense" };
 const char* SixenseManager::SIXENSE_ID_STRING { "Sixense" };
+static const QString QML_LAYOUT = QString("GenericConfiguration.qml");
 
 const bool DEFAULT_ENABLED = false;
 
@@ -79,6 +80,10 @@ bool SixenseManager::isSupported() const {
 #else
     return false;
 #endif
+}
+
+QString SixenseManager::configurationLayout() {
+    return QML_LAYOUT;
 }
 
 void SixenseManager::init() {

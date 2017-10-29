@@ -40,6 +40,8 @@ public:
     virtual bool activate() override;
     virtual void deactivate() override;
 
+    QString configurationLayout() override;
+
     virtual void pluginFocusOutEvent() override { _inputDevice->focusOutEvent(); }
     virtual void pluginUpdate(float deltaTime, const controller::InputCalibrationData& inputCalibrationData) override;
 

@@ -30,6 +30,8 @@ Q_LOGGING_CATEGORY(inputplugins, "hifi.inputplugins")
 #include <NeuronDataReader.h>
 
 const char* NeuronPlugin::NAME = "Neuron";
+
+static const QString QML_LAYOUT = QString("NeuronConfiguration.qml");
 const char* NeuronPlugin::NEURON_ID_STRING = "Perception Neuron";
 
 const bool DEFAULT_ENABLED = false;
@@ -399,6 +401,10 @@ bool NeuronPlugin::isSupported() const {
     // Because it's a client/server network architecture, we can't tell
     // if the neuron is actually connected until we connect to the server.
     return true;
+}
+
+QString NeuronPlugin::configurationLayout() {
+    return QML_LAYOUT;
 }
 
 bool NeuronPlugin::activate() {

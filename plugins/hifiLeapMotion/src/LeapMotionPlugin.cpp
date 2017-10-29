@@ -23,6 +23,7 @@ Q_LOGGING_CATEGORY(inputplugins, "hifi.inputplugins")
 
 const char* LeapMotionPlugin::NAME = "Leap Motion";
 const char* LeapMotionPlugin::LEAPMOTION_ID_STRING = "Leap Motion";
+static const QString QML_LAYOUT = QString("LeapMotionConfiguration.qml");
 
 const bool DEFAULT_ENABLED = false;
 const char* SENSOR_ON_DESKTOP = "Desktop";
@@ -360,6 +361,22 @@ void LeapMotionPlugin::init() {
         preference->setStep(STEP);
         preferences->addPreference(preference);
     }
+}
+
+/*
+void LeapMotionPlugin::setConfigurationSettings(const QJsonObject configurationSettings) {
+    if (isSupported()) {
+       
+        saveSettings();
+    }
+}
+
+QJsonObject LeapMotionPlugin::configurationSettings() {
+    return QJsonObject();
+}*/
+
+QString LeapMotionPlugin::configurationLayout() {
+    return QML_LAYOUT;
 }
 
 bool LeapMotionPlugin::activate() {

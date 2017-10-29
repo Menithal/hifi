@@ -27,6 +27,8 @@ public:
     const QString getName() const override { return NAME; }
     const QString getID() const override { return SDL2_ID_STRING; }
 
+    QString configurationLayout() override;
+
     QStringList getSubdeviceNames() override;
 
     void init() override;

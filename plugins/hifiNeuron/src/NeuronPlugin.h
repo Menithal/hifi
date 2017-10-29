@@ -28,6 +28,9 @@ public:
     // Plugin functions
     virtual void init() override;
     virtual bool isSupported() const override;
+
+    QString configurationLayout() override;
+
     virtual const QString getName() const override { return NAME; }
     const QString getID() const override { return NEURON_ID_STRING; }
 

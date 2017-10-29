@@ -26,6 +26,7 @@ Q_LOGGING_CATEGORY(inputplugins, "hifi.inputplugins")
 
 const char* KinectPlugin::NAME = "Kinect";
 const char* KinectPlugin::KINECT_ID_STRING = "Kinect";
+static const QString QML_LAYOUT = QString("GenericConfiguration.qml");
 
 QStringList kinectJointNames = {
     "SpineBase",
@@ -255,6 +256,10 @@ bool KinectPlugin::isSupported() const {
     supported = initializeDefaultSensor();
 #endif
     return supported;
+}
+
+QString LeapMotionPlugin::configurationLayout() {
+    return QML_LAYOUT;
 }
 
 bool KinectPlugin::activate() {

@@ -33,6 +33,8 @@ public:
 
     virtual void init() override;
 
+    QString configurationLayout() override;
+
     virtual bool activate() override;
     virtual void deactivate() override;
 
