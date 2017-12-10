@@ -2424,13 +2424,14 @@ void Application::updateCamera(RenderArgs& renderArgs) {
         }
     }
     else if (_myCamera.getMode() == CAMERA_MODE_THIRD_PERSON) {
-        if (isHMDMode()) {
+       // if (isHMDMode()) {
             auto hmdWorldMat = myAvatar->getSensorToWorldMatrix() * myAvatar->getHMDSensorMatrix();
             _myCamera.setOrientation(glm::normalize(glmExtractRotation(hmdWorldMat)));
             _myCamera.setPosition(extractTranslation(hmdWorldMat) +
                 myAvatar->getWorldOrientation() * boomOffset);
-        }
+       /* }
         else {
+
             _myCamera.setOrientation(myAvatar->getHead()->getOrientation());
             if (Menu::getInstance()->isOptionChecked(MenuOption::CenterPlayerInView)) {
                 _myCamera.setPosition(myAvatar->getDefaultEyePosition()
@@ -2440,7 +2441,7 @@ void Application::updateCamera(RenderArgs& renderArgs) {
                 _myCamera.setPosition(myAvatar->getDefaultEyePosition()
                     + myAvatar->getWorldOrientation() * boomOffset);
             }
-        }
+        }*/
     }
     else if (_myCamera.getMode() == CAMERA_MODE_MIRROR) {
         if (isHMDMode()) {
