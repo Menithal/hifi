@@ -129,9 +129,14 @@ function onWebEventReceived(event) {
 }
 
 // Restore the navigation animation states (idle, walk, run)
-function restoreAnimation() {
+function restoreAnimation(event) {
+    // Make sure animation is not restored while:
+    // - Unmuting / Muting Self
+    // - Cameraing Around using inspect scripts:
+    if(event.isShifted || event.isMeta || event.isControl || event.isAlt){
+        return;
+    }
     MyAvatar.restoreAnimation();
-    
     // Make sure the input is disconnected after animations are restored so it doesn't affect any emotes other than sit
     Controller.keyPressEvent.disconnect(restoreAnimation);
     Controller.disableMapping(eventMappingName);
