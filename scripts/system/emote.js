@@ -133,7 +133,7 @@ function restoreAnimation(event) {
     // Make sure animation is not restored while:
     // - Unmuting / Muting Self
     // - Cameraing Around using inspect scripts:
-    if(event.isShifted || event.isMeta || event.isControl || event.isAlt){
+    if(event.isMeta || event.isControl || event.isAlt){
         return;
     }
     MyAvatar.restoreAnimation();
